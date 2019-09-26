@@ -14,26 +14,26 @@ namespace HW19
             document.Load(@"https://habrahabr.ru/rss/interesting/");
 
             XmlElement rootElement = document.DocumentElement;
+            var i = 0;
 
             foreach (XmlElement chanelElement in rootElement.ChildNodes)
             {
+                XmlElement itemsElement = chanelElement.GetElementsByTagName("item")[i++] as XmlElement;
 
-                foreach (XmlElement itemElement in chanelElement.ChildNodes)
+                XmlElement titleElement = itemsElement.GetElementsByTagName("title")[0] as XmlElement;
+                XmlElement linkElement = itemsElement.GetElementsByTagName("link")[0] as XmlElement;
+                XmlElement descriptionElement = itemsElement.GetElementsByTagName("description")[0] as XmlElement;
+                XmlElement pubDateElement = itemsElement.GetElementsByTagName("pubDate")[0] as XmlElement;
+
+                items.Add(new Item
                 {
-                    XmlElement titleElement = itemElement.GetElementsByTagName("title")[0] as XmlElement;
-                    XmlElement linkElement = itemElement.GetElementsByTagName("link")[0] as XmlElement;
-                    XmlElement descriptionElement = itemElement.GetElementsByTagName("description")[0] as XmlElement;
-                    XmlElement pubDateElement = itemElement.GetElementsByTagName("pubDate")[0] as XmlElement;
+                    Title = titleElement.InnerText,
+                    Link = linkElement.InnerText,
+                    Description = descriptionElement.InnerText,
+                    PubDate = pubDateElement.InnerText,
+                });
 
-                    items.Add(new Item
-                    {
-                        Title = titleElement.InnerText,
-                        Link = linkElement.InnerText,
-                        Description = descriptionElement.InnerText,
-                        PubDate = pubDateElement.InnerText,
-                    });
 
-                }
             }
 
             foreach (var item in items)
