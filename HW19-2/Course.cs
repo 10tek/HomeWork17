@@ -6,10 +6,10 @@ namespace HW19_2
 {
     public enum Course
     {
-        first,
-        second,
-        third,
-        fourth,
-        fifth
+        First,
+        Second,
+        Third,
+        Fourth,
+        Fifth
     }
 }

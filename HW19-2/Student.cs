@@ -4,7 +4,7 @@ using System.Text;
 
 namespace HW19_2
 {
-    class Student
+    public class Student
     {
         public string FullName { get; set; }
         public int Age { get; set; }
